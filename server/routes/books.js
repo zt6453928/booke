@@ -7,7 +7,8 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
   try {
-    const { rows } = await query('select id, title, author, slug, format, created_at, updated_at from books order by updated_at desc')
+    // include cover_base64 so frontend can show cover on cards
+    const { rows } = await query('select id, title, author, slug, format, cover_base64, created_at, updated_at from books order by updated_at desc')
     res.json(rows)
   } catch (e) {
     console.error('[books:list]', e)
@@ -61,4 +62,3 @@ router.delete('/:id', requireAuth, async (req, res) => {
 })
 
 export default router
-

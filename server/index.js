@@ -18,6 +18,11 @@ const corsOptions = origins.length === 0 ? { origin: true } : {
 app.use(cors(corsOptions))
 app.use(express.json({ limit: '2mb' }))
 
+// Root welcome route so opening the API domain doesn't show an error
+app.get('/', (req, res) => {
+  res.type('text/plain').send('Booke API is running. Try GET /api/health')
+})
+
 app.get('/api/health', (req, res) => res.json({ ok: true }))
 app.use('/api/auth', authRouter)
 app.use('/api/books', booksRouter)
@@ -26,4 +31,3 @@ const PORT = process.env.PORT || 8787
 app.listen(PORT, () => {
   console.log(`API running on :${PORT}`)
 })
-
