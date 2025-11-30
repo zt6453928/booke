@@ -1,0 +1,18 @@
+const KEY = 'booke:token'
+
+export function getToken() {
+  return localStorage.getItem(KEY) || ''
+}
+
+export function setToken(t) {
+  localStorage.setItem(KEY, t)
+}
+
+export function clearToken() {
+  localStorage.removeItem(KEY)
+}
+
+export function isLoggedIn() {
+  return Boolean(getToken())
+}
+
